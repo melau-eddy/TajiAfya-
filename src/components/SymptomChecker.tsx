@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, AlertTriangle, MapPin, Phone } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 interface Question {
   id: number;
@@ -188,8 +189,8 @@ const SymptomChecker = () => {
                 <Button onClick={resetChecker} variant="outline">
                   Take Assessment Again
                 </Button>
-                <Button className="bg-gradient-primary">
-                  Create Patient Account
+                <Button asChild className="bg-gradient-primary">
+                  <Link to="/get-started">Create Patient Account</Link>
                 </Button>
               </div>
             </CardContent>

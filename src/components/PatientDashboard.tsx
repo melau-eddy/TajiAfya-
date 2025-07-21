@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Heart, 
   Droplets, 
@@ -36,6 +38,51 @@ interface PatientData {
 
 const PatientDashboard = () => {
   const [isLogVisible, setIsLogVisible] = useState(false);
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    systolic: "",
+    diastolic: "",
+    bloodSugar: "",
+    weight: "",
+    heartRate: ""
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSaveReading = () => {
+    // Simulate saving reading
+    toast({
+      title: "Reading Saved",
+      description: "Your health metrics have been recorded successfully.",
+    });
+    setFormData({
+      systolic: "",
+      diastolic: "",
+      bloodSugar: "",
+      weight: "",
+      heartRate: ""
+    });
+    setIsLogVisible(false);
+  };
+
+  const handleScheduleAppointment = () => {
+    toast({
+      title: "Appointment Request",
+      description: "Your appointment request has been sent to your healthcare provider.",
+    });
+  };
+
+  const handleViewAlerts = () => {
+    toast({
+      title: "Alerts Center",
+      description: "Viewing all your health alerts and notifications.",
+    });
+  };
   const [patientData] = useState<PatientData>({
     name: "Sarah Johnson",
     condition: "Type 2 Diabetes, Hypertension",
@@ -152,11 +199,11 @@ const PatientDashboard = () => {
                 <p className="text-muted-foreground">{patientData.condition}</p>
               </div>
               <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleScheduleAppointment}>
                   <Calendar className="h-4 w-4 mr-2" />
                   Schedule Appointment
                 </Button>
-                <Button size="sm" className="bg-gradient-primary">
+                <Button size="sm" className="bg-gradient-primary" onClick={handleViewAlerts}>
                   <Bell className="h-4 w-4 mr-2" />
                   View Alerts
                 </Button>
@@ -248,12 +295,18 @@ const PatientDashboard = () => {
                   <div className="flex space-x-2">
                     <Input
                       id="bp-systolic"
+                      name="systolic"
                       placeholder="120"
+                      value={formData.systolic}
+                      onChange={handleInputChange}
                       className="w-full"
                     />
                     <span className="flex items-center text-muted-foreground">/</span>
                     <Input
+                      name="diastolic"
                       placeholder="80"
+                      value={formData.diastolic}
+                      onChange={handleInputChange}
                       className="w-full"
                     />
                   </div>
@@ -263,7 +316,10 @@ const PatientDashboard = () => {
                   <Label htmlFor="blood-sugar">Blood Sugar (mg/dL)</Label>
                   <Input
                     id="blood-sugar"
+                    name="bloodSugar"
                     placeholder="100"
+                    value={formData.bloodSugar}
+                    onChange={handleInputChange}
                   />
                 </div>
                 
@@ -271,7 +327,10 @@ const PatientDashboard = () => {
                   <Label htmlFor="weight">Weight (lbs)</Label>
                   <Input
                     id="weight"
+                    name="weight"
                     placeholder="165"
+                    value={formData.weight}
+                    onChange={handleInputChange}
                   />
                 </div>
                 
@@ -279,14 +338,17 @@ const PatientDashboard = () => {
                   <Label htmlFor="heart-rate">Heart Rate (bpm)</Label>
                   <Input
                     id="heart-rate"
+                    name="heartRate"
                     placeholder="72"
+                    value={formData.heartRate}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
               
               <div className="flex justify-end mt-6 space-x-2">
-                <Button variant="outline">Cancel</Button>
-                <Button className="bg-gradient-primary">Save Reading</Button>
+                <Button variant="outline" onClick={() => setIsLogVisible(false)}>Cancel</Button>
+                <Button className="bg-gradient-primary" onClick={handleSaveReading}>Save Reading</Button>
               </div>
             </CardContent>
           )}

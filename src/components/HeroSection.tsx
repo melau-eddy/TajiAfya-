@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Clock, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-medical.jpg";
 
 const HeroSection = () => {
+  const scrollToSymptomChecker = () => {
+    const element = document.getElementById('symptom-checker');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-gradient-background min-h-screen flex items-center overflow-hidden">
       {/* Background decoration */}
@@ -33,12 +41,16 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-gradient-primary shadow-medical hover:opacity-90 transition-all group">
+              <Button 
+                size="lg" 
+                onClick={scrollToSymptomChecker}
+                className="bg-gradient-primary shadow-medical hover:opacity-90 transition-all group"
+              >
                 Start Health Assessment
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="hover:shadow-card transition-all">
-                Watch Demo
+              <Button size="lg" variant="outline" asChild className="hover:shadow-card transition-all">
+                <Link to="/how-it-works">Watch Demo</Link>
               </Button>
             </div>
 
