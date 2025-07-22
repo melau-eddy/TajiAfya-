@@ -51,9 +51,6 @@ const Navbar = () => {
             <Link to="/about" className="text-foreground hover:text-primary transition-colors">
               About
             </Link>
-            <Button asChild className="bg-gradient-primary hover:opacity-90 transition-all shadow-medical">
-              <Link to="/get-started">Get Started</Link>
-            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -93,11 +90,6 @@ const Navbar = () => {
               >
                 About
               </Link>
-              <div className="pt-2">
-                <Button asChild className="w-full bg-gradient-primary">
-                  <Link to="/get-started" onClick={toggleMenu}>Get Started</Link>
-                </Button>
-              </div>
             </div>
           </div>
         )}
