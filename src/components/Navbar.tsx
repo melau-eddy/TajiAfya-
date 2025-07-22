@@ -51,9 +51,6 @@ const Navbar = () => {
             <Link to="/about" className="text-foreground hover:text-primary transition-colors">
               About
             </Link>
-            <Button variant="outline" asChild className="transition-all hover:shadow-card">
-              <Link to="/sign-in">Sign In</Link>
-            </Button>
             <Button asChild className="bg-gradient-primary hover:opacity-90 transition-all shadow-medical">
               <Link to="/get-started">Get Started</Link>
             </Button>
@@ -96,10 +93,7 @@ const Navbar = () => {
               >
                 About
               </Link>
-              <div className="pt-2 space-y-2">
-                <Button variant="outline" asChild className="w-full">
-                  <Link to="/sign-in" onClick={toggleMenu}>Sign In</Link>
-                </Button>
+              <div className="pt-2">
                 <Button asChild className="w-full bg-gradient-primary">
                   <Link to="/get-started" onClick={toggleMenu}>Get Started</Link>
                 </Button>
